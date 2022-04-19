@@ -2,7 +2,7 @@ import sys
 import psycopg2
 import psycopg2.extras
 
-from config import Config
+from db.config import Config
 
 
 class Database:
@@ -20,12 +20,14 @@ class Database:
         """Connect to a PostgreSQL database"""
         if self.conn is None:
             try:
-                self.conn = psycopg2.connect(host=self.host,
-                                             dbname=self.dbname,
-                                             port=self.port,
-                                             user=self.user,
-                                             password=self.password)
-                print('Connection opened successfully')
+                self.conn = psycopg2.connect(
+                    host=self.host,
+                    dbname=self.dbname,
+                    port=self.port,
+                    user=self.user,
+                    password=self.password,
+                )
+                print("Connection opened successfully")
             except psycopg2.DatabaseError as e:
                 print(e)
                 sys.exit()
