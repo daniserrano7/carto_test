@@ -11,6 +11,5 @@ def create_schema():
         cur.execute(schema_raw_sql)
 
         db.conn.commit()
-        db.conn.close()
     except Exception as e:
         print("Schema creation failed: ", e)
