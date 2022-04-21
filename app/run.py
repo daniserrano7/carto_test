@@ -1,11 +1,9 @@
-from scripts.create_schema import create_schema
-from scripts.populate_db import populate_db
+from server import app
 
 
-def setup():
-    create_schema()
-    populate_db()
+def run():
+    app.run()
 
 
 if __name__ == "__main__":
-    setup()
+    run()
