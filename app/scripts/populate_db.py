@@ -41,6 +41,7 @@ def populate_postal_codes():
         cur.execute(query, values)
 
     db.conn.commit()
+    db.conn.close()
 
 
 def populate_paystats():
