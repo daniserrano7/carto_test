@@ -1,0 +1,73 @@
+[GET] /accumulated?start_date:string&end_date:string
+	return {
+	    start_date: timestamp
+	    end_date: timestamp
+	    amount: float
+	    values: {
+	        age: string
+	        male_ammount: float
+	        female_amount: float
+	    }[]
+	}
+
+[GET] /time_series?start_date:string&end_date:string
+	return {
+	    start_date: timestamp
+	    end_date: timestamp
+	    values: {
+	        timestamp: timestamp
+	        male_amount: float
+	        female_amount: float
+	    }
+	}
+
+[GET] /zipcodes
+	return {
+	    geom: GEOJSON
+	        properties: {
+	            zipcode: string
+	            values: {
+	                id: int
+	                age: string
+	                male_amount: float
+	                female_amount: float
+	            }
+	        }
+	}
+
+[GET] /community
+	return {
+	    geom: GEOJSON
+	        properties: {
+	            amount: float
+	        }
+
+[POST] /auth
+	body {
+	    user: string
+	    password: string
+	}
+
+	return {
+	    token: JWT
+	}
+
+-- OPTIONAL --
+This can be used on feature click to get
+entitiy's data instead of including all
+data in geojson. On one hand, data size is
+reduced and only the needed data is loaded.
+On the other hand, every click has a delay 
+due to latency. Considering geom layer 
+has only ~100 features, all data can be included 
+in geojson without impacting performance
+
+[GET] /entity/<entidy_id:int>
+	return {
+	    zipcode: string
+	    values: {
+	        age: string
+	        male_amount: float
+	        female_amount: float
+	    }
+	}
