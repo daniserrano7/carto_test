@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify
 from db.database import db
 
 
@@ -31,9 +31,9 @@ def zipcodes():
     except Exception as e:
         print("Query '{}' failed: ".format("/zipcodes"), e)
 
-    return {"res": data}
+    return jsonify({"data": data})
 
 
 @bp.route("/<int:zipcode_id>", methods=["GET"])
 def zipcode_id(zipcode_id):
-    return {"res": {"zipcode_id": zipcode_id}}
+    return jsonify({"zipcode_id": zipcode_id})

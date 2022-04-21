@@ -6,6 +6,10 @@ CREATE TABLE postal_codes (
 
 SELECT AddGeometryColumn ('public', 'postal_codes', 'the_geom', 4326, 'MULTIPOLYGON', 2);
 
+CREATE INDEX postal_codes_gist_idx
+  ON postal_codes
+  USING GIST (the_geom);
+
 DROP TABLE IF EXISTS paystats CASCADE;
 DROP TYPE IF EXISTS age;
 DROP TYPE IF EXISTS gender;

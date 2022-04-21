@@ -51,7 +51,6 @@ def populate_paystats():
 
     headers = rows[0].split(",")
     column_index = get_columns_index(headers)
-    print("COLUMN INDEX: ", column_index)
 
     for row in rows[1:]:
         query = """

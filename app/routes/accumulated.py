@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from db.database import db
 
 
@@ -7,7 +7,7 @@ bp = Blueprint("accumulated", __name__, url_prefix="/accumulated")
 
 @bp.route("/", methods=["GET"])
 def total():
-    return {"res": {"amount": 0}}
+    return jsonify({"amount": 0})
 
 
 @bp.route("/by_age_gender", methods=["GET"])
@@ -45,4 +45,4 @@ def by_age_gender():
     except Exception as e:
         print("Query '{}' failed: ".format("/by_age_gender"), e)
 
-    return {"res": data}
+    return jsonify({"data": data})
