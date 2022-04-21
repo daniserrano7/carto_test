@@ -36,8 +36,4 @@ def zipcodes():
 
 @bp.route("/<int:zipcode_id>", methods=["GET"])
 def zipcode_id(zipcode_id):
-    return {
-        "res": {
-            "zipcode_id": zipcode_id
-        }
-    }
+    return {"res": {"zipcode_id": zipcode_id}}
