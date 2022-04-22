@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      STAGE: test
+      DB_HOST: postgres
+      DB_NAME: carto_test
+      DB_USER: admin
+      DB_PASSWORD: admin
+    networks:
+      - default
+    ports:
+      - 5000:5000
+    restart: always
+
+  postgres:
+    environment:
+      POSTGRES_HOST: 127.0.0.1
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: carto_test
+    image: postgres:latest
+    ports:
+      - 5401:5432
+    restart: always
