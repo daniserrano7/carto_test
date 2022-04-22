@@ -18,7 +18,9 @@ def total():
 @bp.route("/by_age_gender", methods=["GET"])
 @cache.cached(query_string=True)
 def by_age_gender():
-    """Returns accumulated payment amount segregated by age and gender"""
+    """Returns accumulated payment amount segregated by age and gender and,
+    optionally, by start and/or end date
+    """
 
     params = request.args.to_dict()
     start_date = params.get("start_date")
