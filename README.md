@@ -30,6 +30,15 @@ DB_PASSWORD   | password
 ## Architecture
 The main parts of the application are de database connection and the endpoints routing. Everything related to the database is under the directory "db", including parameters configuration, drivers connection and SQL schema. The endpoints are grouped ander the directory "routes". Every file represents a blueprint, which holds several endpoints related. The flask server is in the file named "server.py". 
 
+
+## Cache
+Cache is implemented using flask-caching. It is only used on the developed endpoints: 
+- /accumulated/by_age_gender
+- /postal_codes
+- /madrid_community
+
+Caching takes into account query params. This means that using different query params like start_date and end_date in the /accumulated/by_age_gender endpoint will result in different outputs and different caches.
+
 ## Endpoints
 #### - [GET] /accumulated
 Returns total payment amount 
