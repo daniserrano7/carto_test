@@ -66,6 +66,9 @@ The project is developed using Git Flow methodology, and the commits have the fo
 - [FIX] to fix an issue
 - [REF] to refactor some code
 
+## Considerations
+Due to personal issues I had less time than expected and could not implement some topics, like a better documentation of the API using some standard like OpenAPI or an authorization system with encrypted passwords in the database. Those are things I have done in the past in Node.js and I know I could have done it also in Python. On the other hand, I tried to dockerize the application and all the dependencies, including the api and the database. Everythin worked fine but I had troubles installing PostGIS in the docker OS (Alpine). This is the first time I use Docker so my lack of experience  paid for it.
+
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
