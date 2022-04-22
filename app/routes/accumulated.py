@@ -1,5 +1,6 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, make_response
 from db.database import db
+from . import cache
 
 
 bp = Blueprint("accumulated", __name__, url_prefix="/accumulated")
@@ -10,7 +11,10 @@ def total():
     return jsonify({"amount": 0})
 
 
+# query_string=True allows different caching based
+# on the query params values
 @bp.route("/by_age_gender", methods=["GET"])
+@cache.cached(query_string=True)
 def by_age_gender():
     params = request.args.to_dict()
     start_date = params.get("start_date")
@@ -36,13 +40,21 @@ def by_age_gender():
         ;
     """
     values = {"start_date": start_date, "end_date": end_date}
-    data = []
+    data = None
 
     try:
         cur = db.conn.cursor()
         cur.execute(query, values)
         data = cur.fetchall()
+        cur.close()
     except Exception as e:
         print("Query '{}' failed: ".format("/by_age_gender"), e)
 
-    return jsonify({"data": data})
+    if data:
+        response = {"data": data}
+        status_code = 200
+    else:
+        response = {"error": "data could not be retrieved"}
+        status_code = 500
+
+    return make_response(jsonify(response), status_code)
