@@ -3,12 +3,14 @@ from db.database import db
 from . import cache
 
 
-bp = Blueprint("zipcodes", __name__, url_prefix="/zipcodes")
+bp = Blueprint("postal_codes", __name__, url_prefix="/postal_codes")
 
 
 @bp.route("/", methods=["GET"])
 @cache.cached()
-def zipcodes():
+def postal_codes():
+    """Returns postal codes entities including geometry"""
+
     query = """
         SELECT
             postal_codes.id,
@@ -30,7 +32,7 @@ def zipcodes():
         data = cur.fetchall()
         cur.close()
     except Exception as e:
-        print("Query '{}' failed: ".format("/zipcodes"), e)
+        print("Query '{}' failed: ".format("/postal_codes"), e)
 
     if data:
         response = {"data": data}
@@ -42,9 +44,9 @@ def zipcodes():
     return make_response(jsonify(response), status_code)
 
 
-@bp.route("/<int:zipcode_id>", methods=["GET"])
-def zipcode_id(zipcode_id):
-    return jsonify({"zipcode_id": zipcode_id})
+@bp.route("/<int:postal_code_id>", methods=["GET"])
+def postal_code_id(postal_code_id):
+    return jsonify({"postal_code_id": postal_code_id})
 
 
 # This endoint is proposed in order to separate

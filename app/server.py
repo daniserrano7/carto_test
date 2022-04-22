@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_compress import Compress
-from routes import accumulated, time_series, zipcodes, cache
+from routes import accumulated, time_series, postal_codes, cache
 
 
 app = Flask(__name__)
@@ -15,7 +15,7 @@ cache.init_app(app)
 # Route registering
 app.register_blueprint(accumulated.bp)
 app.register_blueprint(time_series.bp)
-app.register_blueprint(zipcodes.bp)
+app.register_blueprint(postal_codes.bp)
 
 
 def get_app():

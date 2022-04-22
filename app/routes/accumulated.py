@@ -8,6 +8,8 @@ bp = Blueprint("accumulated", __name__, url_prefix="/accumulated")
 
 @bp.route("/", methods=["GET"])
 def total():
+    """Returns total payment amount"""
+
     return jsonify({"amount": 0})
 
 
@@ -16,6 +18,8 @@ def total():
 @bp.route("/by_age_gender", methods=["GET"])
 @cache.cached(query_string=True)
 def by_age_gender():
+    """Returns accumulated payment amount segregated by age and gender"""
+
     params = request.args.to_dict()
     start_date = params.get("start_date")
     end_date = params.get("end_date")
